@@ -1,0 +1,26 @@
+﻿@model K3F.PostalAddress.Models.CountryRecord
+@{
+    Script.Require("jQuery");
+}
+           
+@using (Html.BeginFormAntiForgeryPost())
+{
+<fieldset>
+    @Html.LabelFor(x => x.Name, T("Name"))
+    @Html.TextBoxFor(x => x.Name, new { @class = "text" })
+    <button type="submit" class="button primary-action" >@T("Save")</button>
+</fieldset>
+    
+    
+}
+
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript"> $(function () {
+    
+    });
+
+ </script>
+}

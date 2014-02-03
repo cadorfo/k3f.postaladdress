@@ -1,0 +1,35 @@
+﻿@model IList<K3F.PostalAddress.Models.CountryRecord>
+@{
+    Script.Require("jQuery");
+}
+
+<a href="@Url.Action("New", "Country")" class="button" >@T("New Country")</a>
+<div>
+    <table class="items">
+        <thead>
+            <tr>
+                <th>@T("Name")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   <td> <a href="@Url.Action("List", "Region", new {idCountry= item.Id })" >@item.Name</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript"> $(function () {
+    
+    });
+
+ </script>
+}

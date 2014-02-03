@@ -1,0 +1,10 @@
+﻿Name: K3F.PostalAddress
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    K3F.PostalAddress:
+        Description: Description for feature K3F.PostalAddress.
