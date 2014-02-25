@@ -1,0 +1,70 @@
+﻿@model K3F.PostalAddress.ViewModels.PostalAddressViewModel
+@{
+    Script.Require("jQuery");
+}
+           
+<div>
+    <fieldset>
+        @Html.LabelFor(x=>x.Name)
+        @Html.TextBoxFor(x=>x.Name)
+        
+        @Html.LabelFor(x=>x.Street)
+        @Html.TextBoxFor(x=>x.Street)
+
+        @Html.LabelFor(x=>x.PostalCode)
+        @Html.TextBoxFor(x=>x.PostalCode)
+
+        @Html.LabelFor(x=>x.Locality.Id)
+        @Html.DropDownListFor(x=>x.Locality.Id, Model.Localities)
+
+        @Html.Label("regions" ,T("States: ").Text)
+        @Html.DropDownList("regions",new SelectList( Model.Regions,"Value", "Text",Model.Regions.Where(x=>x.Selected).First() ))
+
+        @Html.Label("countries",T("Countries: ").Text)
+        @Html.DropDownList("countries",Model.Country)
+        
+
+    </fieldset>
+</div>
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            $("#PostalAddressPart_countries").change(function () {
+                updateRegions();
+                updateLocalities();
+            });
+
+            $("#PostalAddressPart_regions").change(function () {
+                updateLocalities();
+            });
+        });
+
+        function updateRegions() {
+            var idCountry = $("#PostalAddressPart_countries").val();
+            $.getJSON("@Url.Action("ListJSON","Region", new { area="K3F.PostalAddress" })", { idCountry: idCountry }, function (data) {
+                var dropDownSelector = "#PostalAddressPart_regions";
+                             
+            });
+        }
+        function updateLocalities() {
+            var idRegion = $("#PostalAddressPart_regions").val();
+            $.getJSON("@Url.Action("ListJSON", "Locality", new { area="K3F.PostalAddress" })", { idRegion: idRegion }, function (data) {
+                addOptionToDropdown("#PostalAddressPart_Locality_Id", data);
+             });
+        }
+
+        function addOptionToDropdown(dropdownSelector, data) {
+            $(dropdownSelector).html("");
+            $.each(data, function (index, item) {
+                var option = $("<option></option>");
+                $(option).val(item.Id);
+                $(option).append(item.Name);
+                $(dropdownSelector).append(option);
+            });
+        }
+
+ </script>
+}

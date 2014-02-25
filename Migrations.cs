@@ -1,5 +1,10 @@
 ﻿using Orchard.Data.Migration;
 using System;
+using Orchard.ContentManagement.Drivers;
+using Orchard.ContentManagement.MetaData;
+using Orchard.ContentManagement.MetaData.Builders;
+using Orchard.Core.Contents.Extensions;
+using K3F.PostalAddress.Models;
 
 
 namespace K3F.PostalAddress
@@ -37,6 +42,28 @@ namespace K3F.PostalAddress
                 "CountryRecord",
                 new String[] { "Id" });
             return 1;
+        }
+
+        public int UpdateFrom1()
+        {
+            SchemaBuilder.CreateTable("PostalAddressRecord",
+                table => table
+                .ContentPartRecord()
+                .Column<string>("Name")
+                .Column<string>("PostalCode")
+                .Column<string>("Street")
+                .Column<int>("Locality_Id"));
+
+            SchemaBuilder.CreateForeignKey(
+                "PostalAddressRecord_LocalityRecord_FK",
+                "PostalAddressRecord",
+                new String[] { "Locality_Id" },
+                "LocalityRecord",
+                new String[] { "Id" });
+            ContentDefinitionManager.AlterPartDefinition(
+                typeof(PostalAddressPart).Name, cfg => cfg.Attachable());
+
+            return 2;
         }
 
     }

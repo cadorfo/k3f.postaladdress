@@ -1,4 +1,5 @@
-﻿using Orchard.ContentManagement;
+﻿using K3F.PostalAddress.Models;
+using Orchard.ContentManagement;
 using Orchard.ContentManagement.Records;
 using System;
 
@@ -14,7 +15,7 @@ namespace K3F.PostalAddress.Models
 
         /* Town, city */
 
-        public virtual int LocalityId { get; set; }
+        public virtual LocalityRecord Locality { get; set; }
     }
 
     public class PostalAddressPart : ContentPart<PostalAddressRecord>
@@ -37,10 +38,10 @@ namespace K3F.PostalAddress.Models
             set { Record.Street = value; }
         }
 
-        public virtual int LocalityId
+        public virtual LocalityRecord Locality
         {
-            get { return Record.LocalityId; }
-            set { Record.LocalityId = value; }
+            get { return Record.Locality; }
+            set { Record.Locality = value; }
         }
     }
 }

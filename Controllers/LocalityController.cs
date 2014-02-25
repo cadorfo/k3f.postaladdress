@@ -2,7 +2,7 @@
 using K3F.PostalAddress.Service;
 using Orchard.UI.Admin;
 using System.Web.Mvc;
-
+using System.Linq;
 
 namespace K3F.PostalAddress.Controllers
 {
@@ -21,6 +21,16 @@ namespace K3F.PostalAddress.Controllers
             var model = _postalAddressService.ListLocalities(idRegion);
             ViewBag.Region = _postalAddressService.GetRegion(idRegion);
             return View(model);
+        }
+        public ActionResult ListJSON(int idRegion)
+        {
+            var model = _postalAddressService.ListLocalities(idRegion);
+            ViewBag.Region = _postalAddressService.GetRegion(idRegion);
+            return new JsonResult()
+            {
+                Data = model.Select(x => new { Name = x.Name, Id = x.Id }).ToList(),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
         [Admin]
         public ActionResult New(int idRegion)

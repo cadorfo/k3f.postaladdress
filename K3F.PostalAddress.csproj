@@ -87,6 +87,8 @@
     <Compile Include="Controllers\LocalityController.cs" />
     <Compile Include="Controllers\PostalAddressController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Drivers\PostalAddressDriver.cs" />
+    <Compile Include="Handlers\PostalAddrestHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Locality.cs" />
@@ -94,8 +96,11 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Service\IPostalAddressService.cs" />
     <Compile Include="Service\PostalAddressService.cs" />
+    <Compile Include="ViewModels\PostalAddressViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="placement.info" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Country\List.cshtml" />
   </ItemGroup>
@@ -122,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Locality\New.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\PostalAddress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\PostalAddress.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
